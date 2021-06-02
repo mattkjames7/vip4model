@@ -36,5 +36,9 @@ def _ReadCoeffs():
 	for c in coef:
 		ind = np.sum(np.arange(c.n)+1)-1 + c.m 
 		out[c.gh][ind] = c.coef
+	
+	#convert grom Gauss to nT
+	out.g *= 100000.0
+	out.h *= 100000.0
 		
 	return out
