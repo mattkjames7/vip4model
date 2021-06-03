@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2020)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: legendre.aux
+The style file: agufull08.bst
+Database file #1: ref.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--missing publisher in Ferrers1877
+You've used 1 entry,
+            3076 wiz_defined-function locations,
+            1072 strings with 9428 characters,
+and the built_in function-call counts, 377 in all, are:
+= -- 19
+> -- 11
+< -- 1
++ -- 4
+- -- 4
+* -- 24
+:= -- 58
+add.period$ -- 1
+call.type$ -- 1
+change.case$ -- 3
+chr.to.int$ -- 2
+cite$ -- 2
+duplicate$ -- 33
+empty$ -- 38
+format.name$ -- 4
+if$ -- 70
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 7
+newline$ -- 10
+num.names$ -- 4
+pop$ -- 17
+preamble$ -- 1
+purify$ -- 3
+quote$ -- 0
+skip$ -- 16
+stack$ -- 0
+substring$ -- 3
+swap$ -- 14
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 6
+warning$ -- 1
+while$ -- 3
+width$ -- 0
+write$ -- 15
+(There was 1 warning)

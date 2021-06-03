@@ -1,0 +1,12 @@
+\begin{thebibliography}{1}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{\textit{Ferrers}(1877)}]{Ferrers1877}
+Ferrers, N. (1877), \textit{An elementary treatise on spherical harmonics and
+  subjects connected with them}.
+
+\end{thebibliography}
