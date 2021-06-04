@@ -9,4 +9,4 @@ ModulePath = os.path.dirname(__file__)+'/'
 coeffs = None
 g = None
 h = None
-Snm = None
+Snm = {}

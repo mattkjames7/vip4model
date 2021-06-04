@@ -35,7 +35,7 @@ def _SphHarm(r,theta,phi,MaxDeg=4):
 	#Normalize the polynomials
 	SP = (Pnm.T*Snm.T).T
 	SdP = (dPnm.T*Snm.T).T
-	
+
 	#temporary arrays for the inner sums
 	sumr = np.zeros((r.size,),dtype='float64')
 	sumt = np.zeros((r.size,),dtype='float64')
@@ -48,7 +48,7 @@ def _SphHarm(r,theta,phi,MaxDeg=4):
 	for n in range(1,MaxDeg+1):
 		#define the constant (a/r)**(n+2)
 		C = C*r1
-		
+
 		#do the innder sum for this value of n first
 		#I suspect this could be vectorised, but would probably be 
 		#pretty unreadable if I did
@@ -58,11 +58,12 @@ def _SphHarm(r,theta,phi,MaxDeg=4):
 		for m in range(0,n+1):
 			sumr += SP[n,m]*(g[n,m]*cosmphi[m] + h[n,m]*sinmphi[m])
 			sumt += SdP[n,m]*(g[n,m]*cosmphi[m] + h[n,m]*sinmphi[m])
-			sump += SP[n,m]*(h[n,m]*cosmphi[m] - g[n,m]*sinmphi[m])
-		
+			sump += m*SP[n,m]*(h[n,m]*cosmphi[m] - g[n,m]*sinmphi[m])
+
 		#add it to the output arrays
 		Br += C*(n+1)*sumr
 		Bt += -C*sumt
-		Bp += -(sintheta1)*C*sump
+		Bp += -C*sump
+	Bp = sintheta1*Bp
 
 	return Br,Bt,Bp
