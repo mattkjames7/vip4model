@@ -1,0 +1,26 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+
+\bibitem[{\textit{Connerney et~al.}(1998)\textit{Connerney, Acuña, Ness, and
+  Satoh}}]{Connerney1998}
+Connerney, J. E.~P., M.~H. Acuña, N.~F. Ness, and T.~Satoh (1998), New models
+  of jupiter's magnetic field constrained by the io flux tube footprint,
+  \textit{Journal of Geophysical Research: Space Physics}, \textit{103}(A6),
+  11,929--11,939, \doi{https://doi.org/10.1029/97JA03726}.
+
+\bibitem[{\textit{Ferrers}(1877)}]{Ferrers1877}
+Ferrers, N. (1877), \textit{An elementary treatise on spherical harmonics and
+  subjects connected with them}.
+
+\bibitem[{\textit{Winch et~al.}(2005)\textit{Winch, Ivers, Turner, and
+  Stening}}]{Winch2005}
+Winch, D.~E., D.~J. Ivers, J.~P.~R. Turner, and R.~J. Stening (2005),
+  {Geomagnetism and Schmidt quasi-normalization}, \textit{Geophysical Journal
+  International}, \textit{160}(2), 487--504,
+  \doi{10.1111/j.1365-246X.2004.02472.x}.
+
+\end{thebibliography}
