@@ -44,6 +44,8 @@ def _SphHarm(r,theta,phi,MaxDeg=4):
 	#now sum everything up
 	r1 = 1/r
 	sintheta1 = 1.0/np.sin(theta)
+	if np.isfinite(sintheta1) == False:
+		sintheta1 = 0.0
 	C = (r1)**2
 	for n in range(1,MaxDeg+1):
 		#define the constant (a/r)**(n+2)
