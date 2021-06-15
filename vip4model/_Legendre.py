@@ -26,6 +26,5 @@ def _Legendre(theta,MaxDeg=4):
 			else:
 				Pnm[n,m] = (1.0/(n-m))*(costheta*n21*Pnm[n-1,m] - (n + m -1)*Pnm[n-2,m])
 				dPnm[n,m] = (1.0/(n-m))*(n21*(costheta*dPnm[n-1,m] - sintheta*Pnm[n-1,m]) - (n + m -1)*dPnm[n-2,m])
-				
 
 	return Pnm,dPnm
