@@ -3,7 +3,21 @@ from . import Globals
 from ._ReadCoeffs import _ReadCoeffs
 
 def _CoeffGrids():
+	'''
+	This function returns the grids of "g" and "h" coefficients for the 
+	model. If they do not already exist in memory, they are read in from 
+	file and stored in vip4model.Globals
 	
+	Returns
+	=======
+	g : float
+		2D array of "g" coefficients, shape (MaxDeg+1,MaxDeg+1), where
+		MaxDeg = 4 for VIP4.
+	h : float
+		2D array of "h" coefficients, shape (MaxDeg+1,MaxDeg+1), where
+		MaxDeg = 4 for VIP4.
+	
+	'''	
 	#check if we have loaded them yet
 	if not Globals.g is None and not Globals.h is None:
 		return Globals.g,Globals.h

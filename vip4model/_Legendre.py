@@ -2,7 +2,28 @@ import numpy as np
 
 
 def _Legendre(theta,MaxDeg=4):
+	'''
+	This lovely little routine is used to calculate the P(cos(theta))
+	Legendre polynomials for the model. It starts off with P_00, P_10
+	and P_11 - then recursively calculates the higher degree 
+	coefficients.
 	
+	Inputs
+	======
+	theta : float
+		Colatitude coordinate in radians.
+	MaxDeg:
+		Maximum degree to calculate the model for 1 - 4 (default = 4).
+		
+	Returns
+	=======
+	Pnm : float
+		Polynomial coefficients for each theta and each degree, shape
+		(MaxDeg+1,MaxDeg+1,n), where n is the length of theta.
+	dPnm : float
+		Derivatives of Pnm, with the same shape.
+	
+	'''	
 	
 	Pnm = np.zeros((MaxDeg+1,MaxDeg+1,theta.size),dtype='float64') + np.nan
 	dPnm = np.zeros((MaxDeg+1,MaxDeg+1,theta.size),dtype='float64') + np.nan

@@ -2,7 +2,23 @@ import numpy as np
 from . import Globals
 
 def _Schmidt(MaxDeg=4):
+	'''
+	Calculate the Schmidt normalization parameters for each n,m 
+	combination.
 	
+	Inputs
+	======
+	MaxDeg : int
+		Maximum degree of the model
+		
+	Returns
+	=======
+	Snm : float
+		2D array of Schmidt normalization factors, shape 
+		(MaxDeg+1,MaxDeg+1)
+	
+	
+	'''	
 	if MaxDeg in list(Globals.Snm.keys()):
 		return Globals.Snm[MaxDeg]
 	

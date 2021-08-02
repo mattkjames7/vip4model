@@ -4,8 +4,22 @@ import PyFileIO as pf
 
 def _ReadCoeffs():
 	'''
-	Read in the file containing the g anh Schmidt normalized 
+	Read in the file containing the g and h Schmidt normalized 
 	coefficients.
+	
+	Returns
+	=======
+	out : numpy.recarray
+		Structured array containing all of the model coefficients.
+		Contains the following fields:
+		n : int
+			n index
+		m : int
+			m index
+		g : float
+			g coefficient
+		h : float
+			h coefficient
 
 	'''
 	
