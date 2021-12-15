@@ -8,4 +8,4 @@ from ._SphHarm import _SphHarm
 from ._Legendre import _Legendre
 from .Model import Model
 from .ModelCart import ModelCart
-from .Test import Test
+from .Test import Test,TestOutput

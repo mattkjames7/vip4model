@@ -68,3 +68,28 @@ def Test(R=0.85,MaxDeg=4):
 	cbar.set_label('$B_r$ (Gauss) at $r$ = {:4.2f}'.format(R) + ' R$_{j}$')
 	
 	return ax
+
+
+def TestOutput(fname):
+	
+	#positions to test
+	r = np.array([3,3,3,3, 3,3,3,3, 3,3,3,3, 3,3,3,3],dtype='float64')
+	theta = np.array([10,10,10,10,55,55,55,55,90,90,90,90,130,130,130,130],dtype='float64')
+	phi = np.array([0,27,180,340, 0,27,180,340, 0,27,180,340, 0,27,180,340],dtype='float64')
+	
+	#model output
+	Br,Bt,Bp = Model(r,theta*np.pi/180.0,phi*np.pi/180.0)
+
+	#save to file
+	f = open(fname,'w')
+	out = '  R  | Theta |  Phi  |         Br         |         Bt         |         Bp         '
+	print(out)
+	f.write(out+'\n')
+	out = '-----|-------|-------|--------------------|--------------------|--------------------' 
+	print(out)
+	f.write(out+'\n')
+	for i in range(0,r.size):
+		out = ' {:3.1f} | {:5.1f} | {:5.1f} | {:18.11f} | {:18.11f} | {:18.11f}'.format(r[i],theta[i],phi[i],Br[i],Bt[i],Bp[i])
+		print(out)
+		f.write(out+'\n')
+	f.close()
