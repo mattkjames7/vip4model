@@ -3,6 +3,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{natbib}
+
 \usepackage[a4paper, margin=1in]{geometry}
 
 %opening
@@ -192,7 +193,7 @@
 	\end{align}	
 	
 	\subsection{Recurrence Relations}
-	
+		\label{SectRecurrence}
 		There are three recurrence relations which are used to calculate the associate polynomials from lower order/degree polynomials. 
 		
 		\begin{align}
@@ -355,12 +356,124 @@
 	
 	\begin{align}
 		B_r &= -\frac{\partial V}{\partial r} &= \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{n+2} (n+1) \sum_{m=0}^{n} \left\{P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right]\right\}, \\
-		B_\theta &= -\frac{1}{r}\frac{\partial V}{\partial \theta} &= -\sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{n+2} \sum_{m=0}^{n} \left\{\frac{\text{d}} P_n^m(\cos{\theta}){\text{d}\theta} \left[g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right]\right\}, \\
-		B_\phi &= -\frac{1}{r\sin{\theta}}\frac{\partial V}{\partial r} &= -\frac{1}{\sin{\theta}}\sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{n+2} \sum_{m=0}^{n} \left\{P_n^m(\cos{\theta}) \left[h_n^m \cos{(m\phi)} - g_n^m\sin{(m\phi)}\right]\right\}.
+		B_\theta &= -\frac{1}{r}\frac{\partial V}{\partial \theta} &= -\sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{n+2} \sum_{m=0}^{n} \left\{\frac{\text{d}}{\text{d}\theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right]\right\}, \\
+		B_\phi &= -\frac{1}{r\sin{\theta}}\frac{\partial V}{\partial \phi} &= -\frac{1}{\sin{\theta}}\sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{n+2} \sum_{m=0}^{n} \left\{mP_n^m(\cos{\theta}) \left[h_n^m \cos{(m\phi)} - g_n^m\sin{(m\phi)}\right]\right\}.
 	\end{align}
 	
 	In the code, the above equations use $a =1$ and $r$ in units of $R_J$.
 	
+	\subsection{Cartesian Solution}
+		
+		Possibly dodgy derivation of the Cartesian solution to equation \ref{EqScPot}, i.e.
+		
+		\begin{equation}
+			\mathbf{B} = -\left(\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}\right) V. \label{EqSphHarmCart}
+		\end{equation}
+	
+		This will be done by splitting equation \ref{EqSphHarm} into several parts and combining them at the end...
+		
+		\subsubsection{Part 1}
+			
+			The derivatives of 
+			\begin{equation} 
+				a \left(\frac{a}{r}\right)^{n+1},
+			\end{equation}
+			where $r = \sqrt{x^2 + y^2 + z^2}$ and we will define $u = a/r$.
+			\begin{align}
+				\frac{\partial}{\partial x} \left[ a \left( \frac{a}{r}\right)^{n+1} \right] &= a \frac{\text{d} u}{\text{d} u} u^{n+1} \cdot \frac{\text{d} u}{\text{d} r} \cdot \frac{\text{d} r}{\text{d} x},\\
+				&= a\left((n+1)u^n\right)\cdot \left(-\frac{u^2}{a}\right) \cdot \left( \frac{a}{r}\right), \\
+				&= -(n+1)\left(\frac{x}{r}\right)\left(\frac{a}{r}\right)^{n+2}.
+			\end{align}
+			
+			All three components have similar solutions:
+			
+			\begin{align}
+				\frac{\partial}{\partial x} \left[ a \left( \frac{a}{r}\right)^{n+1} \right] &= -(n+1)\left(\frac{x}{r}\right)\left(\frac{a}{r}\right)^{n+2}, \\
+				\frac{\partial}{\partial y} \left[ a \left( \frac{a}{r}\right)^{n+1} \right] &= -(n+1)\left(\frac{y}{r}\right)\left(\frac{a}{r}\right)^{n+2}, \\
+				\frac{\partial}{\partial z} \left[ a \left( \frac{a}{r}\right)^{n+1} \right] &= -(n+1)\left(\frac{z}{r}\right)\left(\frac{a}{r}\right)^{n+2}.
+			\end{align}
+		
+		\subsubsection{Part 2}
+			
+			The derivatives of $P_n^m(\cos\theta)$ for each component can be done using the chain rule, e.g.:
+			
+			\begin{equation}
+				\frac{\partial}{\partial x} P_n^m(\cos\theta) = \frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta) \frac{\partial \theta}{\partial x}.
+			\end{equation}
+			
+			Using
+			\begin{equation}
+			\theta = \arccos\frac{z}{r} = \arccos{\frac{z}{\sqrt{x^2 + y^2 + z^2}}},
+			\end{equation}
+			and 
+			\begin{equation}
+				\frac{\text{d}}{\text{d} u} \arccos{u} = \frac{-1}{\sqrt{1 - u^2}}, 
+			\end{equation}
+			the derivatives of $\theta$ are:
+			\begin{align}
+				\frac{\partial \theta}{\partial x} &= \frac{xz}{\rho r^2}, \\
+				\frac{\partial \theta}{\partial y} &= \frac{yz}{\rho r^2}, \\
+				\frac{\partial \theta}{\partial z} &= \frac{\rho^2}{r^3}, 
+			\end{align}
+			where $\rho = \sqrt{x^2 + y^2}$.
+			
+			Legendre polynomials are therefore,
+			\begin{align}
+				\frac{\partial}{\partial x} P_n^m(\cos\theta) &= \left(\frac{xz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta), \\
+				\frac{\partial}{\partial y} P_n^m(\cos\theta) &= \left(\frac{yz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta), \\
+				\frac{\partial}{\partial z} P_n^m(\cos\theta) &= \left(\frac{\rho^2}{r^3}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta), 
+			\end{align}	
+			where $\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta)$ is already calculated using the spherical polar version of the code (see section \ref{SectRecurrence}).
+		
+		\subsubsection{Part 3}		
+		
+			This section deals with the derivative of 
+			\begin{equation}
+				g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)},
+			\end{equation}	
+			which will be treated as a chain rule, e.g.
+			\begin{equation}
+				\frac{\partial}{\partial x}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) = \frac{\text{d}}{\text{d}\phi}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right)\cdot\frac{\partial\phi}{\partial x}.
+			\end{equation}
+			
+			The first step in that chain rule is as follows (and used in the spherical polar version),
+			\begin{equation}
+				\frac{\text{d}}{\text{d}\phi}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) = m\left( h_n^m \cos{(m\phi)} - g_n^m \sin{(m\phi)}\right). \label{Eqdghdphi}
+			\end{equation}
+			
+			Using $\phi = \arctan{(y/x)}$ and the fact that
+			\begin{equation}
+				\frac{\text{d}}{\text{d} u} \arctan{u} = \frac{1}{1 + u^2},
+			\end{equation}
+			the three derivatives of $\phi$ are,
+			\begin{align}
+				\frac{\partial \phi}{\partial x} = \frac{1}{1 + \left(\frac{y}{x}\right)^2}\cdot\frac{-y}{x^2} &= \frac{-y}{\rho}, \label{Eqdphidx} \\
+				\frac{\partial \phi}{\partial y} = \frac{1}{1 + \left(\frac{y}{x}\right)^2}\cdot\frac{1}{x} &= \frac{x}{\rho},\label{Eqdphidy} \\ 
+				\frac{\partial \phi}{\partial z} = \frac{1}{1 + \left(\frac{y}{x}\right)^2}\cdot 0 &= 0. \label{Eqdphidz}
+			\end{align}
+			
+			Combining equation \ref{Eqdghdphi} with equations \ref{Eqdphidx}-\ref{Eqdphidz} gives,
+			\begin{align}
+				\frac{\partial}{\partial x}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) &= -m\frac{y}{\rho}\left( h_n^m \cos{(m\phi)} - g_n^m \sin{(m\phi)}\right), \\
+				\frac{\partial}{\partial y}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) &= m\frac{x}{\rho}\left( h_n^m \cos{(m\phi)} - g_n^m \sin{(m\phi)}\right), \\
+				\frac{\partial}{\partial z}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) &= 0
+			\end{align}
+		
+		\subsubsection{Combined solution}	
+			
+			Using the three parts above to solve equation \ref{EqSphHarmCart}:
+			
+			\begin{align}
+				B_x = -\frac{\partial V}{\partial x} &= \sum_{n=1}^{n_{max}} (n + 1)\left(\frac{x}{r}\right)\left(\frac{a}{r}\right)^{(n+2)} \sum_{m=0}^{n} \left\{ P_n^m(\cos{\theta}) \left[ g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)}\right] \right\}    \nonumber \\
+				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{xz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi} + h_n^m \sin{(m\phi)} \right] \nonumber \\
+				&+ m\frac{y}{\rho} P_n^m(\cos{\theta}) \left[ g_n^m\sin{(m\phi)} - h_n^m \cos{(m\phi)}\right]  \biggr\} \\
+				B_y = -\frac{\partial V}{\partial y} &= \sum_{n=1}^{n_{max}} (n + 1)\left(\frac{y}{r}\right)\left(\frac{a}{r}\right)^{(n+2)} \sum_{m=0}^{n} \left\{ P_n^m(\cos{\theta}) \left[ g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)}\right] \right\}    \nonumber \\
+				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{yz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi} + h_n^m \sin{(m\phi)} \right] \nonumber \\
+				&+ m\frac{x}{\rho} P_n^m(\cos{\theta}) \left[ h_n^m \cos{(m\phi)} - g_n^m\sin{(m\phi)}\right]  \biggr\} \\
+				B_z = -\frac{\partial V}{\partial z} &= \sum_{n=1}^{n_{max}} (n + 1)\left(\frac{z}{r}\right)\left(\frac{a}{r}\right)^{(n+2)} \sum_{m=0}^{n} \left\{ P_n^m(\cos{\theta}) \left[ g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)}\right] \right\}    \nonumber \\
+				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{\rho^2}{\rho r^3}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)} \right]  \biggr\}.				
+			\end{align}
+			
 \bibliographystyle{agufull08}
 \bibliography{ref}
 \end{document}
