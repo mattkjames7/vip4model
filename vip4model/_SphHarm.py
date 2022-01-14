@@ -96,3 +96,99 @@ def _SphHarm(r,theta,phi,MaxDeg=4):
 	Bp = sintheta1*Bp
 
 	return Br,Bt,Bp
+
+
+
+def _SphHarmScalar(r,theta,phi,MaxDeg=4):
+	'''
+	This function calculates the VIP4 model field using spherical
+	harmonics. 
+	
+	Inputs
+	======
+	r : float
+		Radial coordinate in Rj (69,911 km - this is wrong).
+	theta : float
+		Colatitude in radians (RH SIII).
+	phi : float
+		Azimuth in radians (RH SIII).
+	MaxDeg : int
+		Maximum degree of the model to use - can be 1 to 4 (default=4)
+		for VIP4, where larger degrees take longer to process, but are
+		better.
+	
+	Returns
+	=======
+	Br : float
+		Magnetic field strength in radial direction (nT).
+	Bt : float
+		Magnetic field strength in latitudinal direction (nT).
+	Bp : float
+		Magnetic field strength in azimuthal direction (nT).
+	
+	'''
+	
+
+	#calculate cosmphi and sinmphi
+	cosmphi = np.zeros((MaxDeg+1),dtype='float64') + 1.0
+	sinmphi = np.zeros((MaxDeg+1),dtype='float64')
+	for m in range(1,MaxDeg+1):
+		mphi = m*phi
+		cosmphi[m] = np.cos(mphi)
+		sinmphi[m] = np.sin(mphi)
+	
+	#get the grids of g and h parameters
+	g,h = _CoeffGrids()
+	
+	#output arrays
+	Br = 0.0
+	Bt = 0.0
+	Bp = 0.0
+	
+
+	#start calculating p costheta and its derivative
+	Pnm,dPnm = _LegendreScalar(theta,MaxDeg)
+
+	#get the Schmidt coefficients
+	#not sure if these are needed - I wonder if the g and h coefficients
+	#are already normalised...
+	Snm = _Schmidt(MaxDeg)
+	
+	#Normalize the polynomials
+	SP = Pnm*Snm
+	SdP = dPnm*Snm
+
+	#temporary arrays for the inner sums
+	sumr = 0.0
+	sumt = 0.0
+	sump = 0.0
+	
+	#now sum everything up
+	r1 = 1/r
+	sintheta1 = 1.0/np.sin(theta)
+	if np.isfinite(sintheta1) == False:
+		sintheta1 = 0.0
+	C = r1*r1
+	for n in range(1,MaxDeg+1):
+		#define the constant (a/r)**(n+2)
+		C = C*r1
+
+		#do the innder sum for this value of n first
+		#I suspect this could be vectorised, but would probably be 
+		#pretty unreadable if I did
+		sumr = 0.0
+		sumt = 0.0
+		sump = 0.0
+		for m in range(0,n+1):
+			gchs = g[n,m]*cosmphi[m] + h[n,m]*sinmphi[m]
+			sumr += SP[n,m]*gchs
+			sumt += SdP[n,m]*gchs
+			sump += m*SP[n,m]*(h[n,m]*cosmphi[m] - g[n,m]*sinmphi[m])
+
+		#add it to the output arrays
+		Br += C*(n+1)*sumr
+		Bt += -C*sumt
+		Bp += -C*sump
+	Bp = sintheta1*Bp
+
+	return Br,Bt,Bp
