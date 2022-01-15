@@ -1,5 +1,7 @@
 import numpy as np
-from .Model import Model
+from .Model import Model,ModelScalar
+from ._SphHarm import _SphHarm,_SphHarmScalarCart
+
 
 def ModelCart(x,y,z,MaxDeg=4):
 	'''
@@ -105,3 +107,7 @@ def ModelCartScalar(x,y,z,MaxDeg=4):
 	return Bx,By,Bz
 	
 
+def ModelTest(x,y,z,MaxDeg=4):
+	
+	
+	return _SphHarmScalarCart(x,y,z,MaxDeg)

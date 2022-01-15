@@ -413,7 +413,7 @@
 			\begin{align}
 				\frac{\partial \theta}{\partial x} &= \frac{xz}{\rho r^2}, \\
 				\frac{\partial \theta}{\partial y} &= \frac{yz}{\rho r^2}, \\
-				\frac{\partial \theta}{\partial z} &= \frac{\rho^2}{r^3}, 
+				\frac{\partial \theta}{\partial z} &= -\frac{\rho}{r^2}, 
 			\end{align}
 			where $\rho = \sqrt{x^2 + y^2}$.
 			
@@ -421,13 +421,13 @@
 			\begin{align}
 				\frac{\partial}{\partial x} P_n^m(\cos\theta) &= \left(\frac{xz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta), \\
 				\frac{\partial}{\partial y} P_n^m(\cos\theta) &= \left(\frac{yz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta), \\
-				\frac{\partial}{\partial z} P_n^m(\cos\theta) &= \left(\frac{\rho^2}{r^3}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta), 
+				\frac{\partial}{\partial z} P_n^m(\cos\theta) &= \left(-\frac{\rho}{r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta), 
 			\end{align}	
 			where $\frac{\text{d}}{\text{d} \theta} P_n^m(\cos\theta)$ is already calculated using the spherical polar version of the code (see section \ref{SectRecurrence}).
 		
 		\subsubsection{Part 3}		
 		
-			This section deals with the derivative of 
+			This section deals with the derivative of
 			\begin{equation}
 				g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)},
 			\end{equation}	
@@ -447,15 +447,15 @@
 			\end{equation}
 			the three derivatives of $\phi$ are,
 			\begin{align}
-				\frac{\partial \phi}{\partial x} = \frac{1}{1 + \left(\frac{y}{x}\right)^2}\cdot\frac{-y}{x^2} &= \frac{-y}{\rho}, \label{Eqdphidx} \\
-				\frac{\partial \phi}{\partial y} = \frac{1}{1 + \left(\frac{y}{x}\right)^2}\cdot\frac{1}{x} &= \frac{x}{\rho},\label{Eqdphidy} \\ 
+				\frac{\partial \phi}{\partial x} = \frac{1}{1 + \left(\frac{y}{x}\right)^2}\cdot\frac{-y}{x^2} &= \frac{-y}{\rho^2}, \label{Eqdphidx} \\
+				\frac{\partial \phi}{\partial y} = \frac{1}{1 + \left(\frac{y}{x}\right)^2}\cdot\frac{1}{x} &= \frac{x}{\rho^2},\label{Eqdphidy} \\ 
 				\frac{\partial \phi}{\partial z} = \frac{1}{1 + \left(\frac{y}{x}\right)^2}\cdot 0 &= 0. \label{Eqdphidz}
 			\end{align}
 			
 			Combining equation \ref{Eqdghdphi} with equations \ref{Eqdphidx}-\ref{Eqdphidz} gives,
 			\begin{align}
-				\frac{\partial}{\partial x}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) &= -m\frac{y}{\rho}\left( h_n^m \cos{(m\phi)} - g_n^m \sin{(m\phi)}\right), \\
-				\frac{\partial}{\partial y}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) &= m\frac{x}{\rho}\left( h_n^m \cos{(m\phi)} - g_n^m \sin{(m\phi)}\right), \\
+				\frac{\partial}{\partial x}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) &= -m\frac{y}{\rho^2}\left( h_n^m \cos{(m\phi)} - g_n^m \sin{(m\phi)}\right), \\
+				\frac{\partial}{\partial y}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) &= m\frac{x}{\rho^2}\left( h_n^m \cos{(m\phi)} - g_n^m \sin{(m\phi)}\right), \\
 				\frac{\partial}{\partial z}\left(g_n^m \cos{(m\phi)} + h_n^m\sin{(m\phi)}\right) &= 0
 			\end{align}
 		
@@ -465,13 +465,13 @@
 			
 			\begin{align}
 				B_x = -\frac{\partial V}{\partial x} &= \sum_{n=1}^{n_{max}} (n + 1)\left(\frac{x}{r}\right)\left(\frac{a}{r}\right)^{(n+2)} \sum_{m=0}^{n} \left\{ P_n^m(\cos{\theta}) \left[ g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)}\right] \right\}    \nonumber \\
-				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{xz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi} + h_n^m \sin{(m\phi)} \right] \nonumber \\
-				&+ m\frac{y}{\rho} P_n^m(\cos{\theta}) \left[ g_n^m\sin{(m\phi)} - h_n^m \cos{(m\phi)}\right]  \biggr\} \\
+				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{xz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)} \right] \nonumber \\
+				&+ m\frac{y}{\rho^2} P_n^m(\cos{\theta}) \left[ g_n^m\sin{(m\phi)} - h_n^m \cos{(m\phi)}\right]  \biggr\} \\
 				B_y = -\frac{\partial V}{\partial y} &= \sum_{n=1}^{n_{max}} (n + 1)\left(\frac{y}{r}\right)\left(\frac{a}{r}\right)^{(n+2)} \sum_{m=0}^{n} \left\{ P_n^m(\cos{\theta}) \left[ g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)}\right] \right\}    \nonumber \\
-				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{yz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi} + h_n^m \sin{(m\phi)} \right] \nonumber \\
-				&+ m\frac{x}{\rho} P_n^m(\cos{\theta}) \left[ h_n^m \cos{(m\phi)} - g_n^m\sin{(m\phi)}\right]  \biggr\} \\
+				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{yz}{\rho r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)} \right] \nonumber \\
+				&+ m\frac{x}{\rho^2} P_n^m(\cos{\theta}) \left[ h_n^m \cos{(m\phi)} - g_n^m\sin{(m\phi)}\right]  \biggr\} \\
 				B_z = -\frac{\partial V}{\partial z} &= \sum_{n=1}^{n_{max}} (n + 1)\left(\frac{z}{r}\right)\left(\frac{a}{r}\right)^{(n+2)} \sum_{m=0}^{n} \left\{ P_n^m(\cos{\theta}) \left[ g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)}\right] \right\}    \nonumber \\
-				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{\rho^2}{ r^3}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)} \right]  \biggr\}.				
+				&- a \sum_{n=1}^{n_{max}} \left(\frac{a}{r}\right)^{(n+1)} \sum_{m=0}^{n} \biggl\{ \left(\frac{\rho}{ r^2}\right)\frac{\text{d}}{\text{d} \theta} P_n^m(\cos{\theta}) \left[g_n^m \cos{(m\phi)} + h_n^m \sin{(m\phi)} \right]  \biggr\}.				
 			\end{align}
 			
 \bibliographystyle{agufull08}
