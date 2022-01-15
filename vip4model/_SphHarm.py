@@ -278,9 +278,6 @@ def _SphHarmScalarCart(x,y,z,MaxDeg=4):
 		y_o_p = 0.0
 		yz_o_pr2 = 0.0
 	
-	print(x_o_r,xz_o_pr2,y_o_p)
-	print(y_o_r,yz_o_pr2,x_o_p)
-	print(z_o_r,p_o_r2)
 	
 	#now sum everything up
 	r1 = 1/r
