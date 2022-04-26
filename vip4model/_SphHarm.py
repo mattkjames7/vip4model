@@ -262,14 +262,18 @@ def _SphHarmScalarCart(x,y,z,MaxDeg=4):
 	#175
 	x_o_r = x/r
 	xz_o_pr2 = (x*z)/(rho*r*r)
-	y_o_p = y/(rho*rho)
+	y_o_p2 = y/(rho*rho)
 	#176
 	y_o_r = y/r
 	yz_o_pr2 = (y*z)/(rho*r*r)
-	x_o_p = x/(rho*rho)
+	x_o_p2 = x/(rho*rho)
 	#177
 	z_o_r = z/r
 	p_o_r2 = -rho/(r*r)
+	
+	x_o_p = x/rho
+	y_o_p = y/rho
+	z_o_r2 = z/(r*r)
 	
 	if x == 0:
 		x_o_p = 0.0
@@ -278,6 +282,15 @@ def _SphHarmScalarCart(x,y,z,MaxDeg=4):
 		y_o_p = 0.0
 		yz_o_pr2 = 0.0
 	
+	if y==0 and x ==0:
+		print(0,x_o_p,y_o_p,xz_o_pr2,yz_o_pr2,z_o_r2)
+		x_o_p = 1
+		x_o_p2 = 1
+		y_o_p = 1
+		y_o_p2 = 1
+		xz_o_pr2 = 1.0/z
+		yz_o_pr2 = 1.0/z
+		print(0,x_o_p,y_o_p,xz_o_pr2,yz_o_pr2,z_o_r2)
 	
 	#now sum everything up
 	r1 = 1/r
@@ -301,8 +314,9 @@ def _SphHarmScalarCart(x,y,z,MaxDeg=4):
 			gshc = g[n,m]*sinmphi[m] - h[n,m]*cosmphi[m]
 			sumxyz0 += SP[n,m]*gchs
 
-			sumx1 += xz_o_pr2*SdP[n,m]*gchs + m*y_o_p*SP[n,m]*gshc
-			sumy1 += yz_o_pr2*SdP[n,m]*gchs - m*x_o_p*SP[n,m]*gshc
+			#sumx1 += xz_o_pr2*SdP[n,m]*gchs + m*y_o_p2*SP[n,m]*gshc
+			sumx1 += x_o_p*z_o_r2*SdP[n,m]*gchs + m*y_o_p2*SP[n,m]*gshc
+			sumy1 += y_o_p*z_o_r2*SdP[n,m]*gchs - m*x_o_p2*SP[n,m]*gshc
 			sumz1 += p_o_r2*SdP[n,m]*gchs
 
 		#add it to the output arrays

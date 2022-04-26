@@ -4,8 +4,9 @@ from . import Globals
 from ._ReadCoeffs import _ReadCoeffs
 from ._CoeffGrids import _CoeffGrids
 from ._Schmidt import _Schmidt
-from ._SphHarm import _SphHarm
+from ._SphHarm import _SphHarm,_SphHarmScalar,_SphHarmScalarCart
 from ._Legendre import _Legendre
 from .Model import Model,ModelScalar
 from .ModelCart import ModelCart,ModelCartScalar,ModelTest
 from .Test import Test,TestOutput
+from .TestTheta0 import TestTheta0
