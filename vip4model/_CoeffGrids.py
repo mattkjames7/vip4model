@@ -39,8 +39,11 @@ def _CoeffGrids():
 	
 	#scale to new Rj = 71,492 km (previously 71,323 km)
 	rscale = 1.0023695021241394
+	r0 = np.float64(71323.0)
+	r1 = np.float64(71492.0)
+	C = (r0/r1)**2
 	for n in range(1,MaxDeg+1):
-		C = (1.0/rscale)**(n+2)
+		C = C*(r0/r1)
 		g[n] = g[n]*C
 		h[n] = h[n]*C
 
