@@ -36,6 +36,13 @@ def _CoeffGrids():
 	#fill it in
 	g[coeffs.n,coeffs.m] = coeffs.g
 	h[coeffs.n,coeffs.m] = coeffs.h
+	
+	#scale to new Rj = 71,492 km (previously 71,323 km)
+	rscale = 1.0023695021241394
+	for n in range(1,MaxDeg+1):
+		C = (1.0/rscale)**(n+2)
+		g[n] = g[n]*C
+		h[n] = h[n]*C
 
 	#add to globals
 	Globals.g = g
