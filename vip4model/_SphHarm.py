@@ -11,7 +11,7 @@ def _SphHarm(r,theta,phi,MaxDeg=4):
 	Inputs
 	======
 	r : float
-		Radial coordinate in Rj (69,911 km).
+		Radial coordinate in Rj (71,492 km).
 	theta : float
 		Colatitude in radians (RH SIII).
 	phi : float
@@ -107,7 +107,7 @@ def _SphHarmScalar(r,theta,phi,MaxDeg=4):
 	Inputs
 	======
 	r : float
-		Radial coordinate in Rj (69,911 km - this is wrong).
+		Radial coordinate in Rj (71,492 km - this is wrong).
 	theta : float
 		Colatitude in radians (RH SIII).
 	phi : float
