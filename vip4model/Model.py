@@ -34,7 +34,7 @@ def Model(r,theta,phi,MaxDeg=4):
 	'''
 	
 	#make all the inputs arrays
-	_r = np.array([r]).flatten()
+	_r = np.array([r]).flatten()*1.0023695021241394
 	_t = np.array([theta]).flatten()
 	_p = np.array([phi]).flatten()
 	
@@ -75,4 +75,4 @@ def ModelScalar(r,theta,phi,MaxDeg=10):
 	'''
 	
 
-	return _SphHarmScalar(r,theta,phi,MaxDeg)
+	return _SphHarmScalar(r*1.0023695021241394,theta,phi,MaxDeg)
